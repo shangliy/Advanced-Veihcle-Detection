@@ -124,6 +124,8 @@ def process_image(image):
                                 hist_feat=hist_feat, hog_feat=hog_feat, previous_windows=hot_windows) 
            
     draw_windws(draw_image, hot_windows,img_vis,fram_count,check_sta)
+    
+    # Generate the heat_map and use threshold to remove noe-reliable windows pixels
     heat_img = heat_generation(img_shape,hot_windows,frame_dec,fram_count)    
     labels = label(heat_img)
 

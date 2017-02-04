@@ -249,24 +249,90 @@ So, the slide windows are shown in below:
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to try to minimize false positives and reliably detect cars?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result. These in implemented in function `search_windows()` of **`util_funcs.py`** from line **202 to 252**, 
+The detail of the function Pipeline for each test images:
+![alt text](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/INFER_pipepline.png?raw=true)
 
-![alt text][image4]
+Here are the samples pipline for test images:
+* tes1.jpg
+![alt text](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/TEST_IMAGES_1.png?raw=true)
+* tes2.jpg
+![alt text](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/TEST_IMAGES_2.png?raw=true)
+* tes3.jpg
+![alt text](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/TEST_IMAGES_3.png?raw=true)
+* tes4.jpg
+![alt text](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/TEST_IMAGES_4.png?raw=true)
+* tes5.jpg
+![alt text](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/TEST_IMAGES_5.png?raw=true)
+* tes6.jpg
+![alt text](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/TEST_IMAGES_6.png?raw=true)
+
+And these are final results for each test images;
+![alt text](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/test_results.png?raw=true)
+
+**to minimize false positives and reliably detect cars** 
+> * I used **heat_map** (shown aboce) to collect pixel information from hot_windwos and use threshold to remove non-reliable windows pixels. This is implemented in line **128** of **`video_pro.py`** using 
+> function **`heat_generation()`**, whose detail is implemented in **`util_funcs.py`** from line **273 to 303**;
+>> heat_img[box[0][1]:box[1][1], box[0][0]:box[1][0]] += 1
+>> heatmap[heatmap <= threshold] = 0
+> * Narrow down the searching area to remove more distortion to decrease chance of false postivities;
+> * Collecting image data from false positives image areas and training again to get better classifier with fewer false positives;
 ---
 
 ### Video Implementation
 
 ####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 Here's a [link to my video result](./project_video.mp4)
+Youtube Link.
 
 
 ####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used blob detection in Sci-kit Image (Determinant of a Hessian [`skimage.feature.blob_doh()`](http://scikit-image.org/docs/dev/auto_examples/plot_blob.html) worked best for me) to identify individual blobs in the heatmap and then determined the extent of each blob using [`skimage.morphology.watershed()`](http://scikit-image.org/docs/dev/auto_examples/plot_watershed.html). I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+2.1 filter for false positives
+>* Narrow down the searching area to remove more distortion to decrease chance of false postivities,implemented in **`video_pro.py`** from line **106 to 109**
+>*  used **heat_map** (shown aboce) to collect pixel information from hot_windwos and use threshold to remove non-reliable windows pixels. This is implemented in line **128** of **`video_pro.py`** using 
+function **`heat_generation()`**, whose detail is implemented in **`util_funcs.py`** from line **273 to 303**;
+>> heat_img[box[0][1]:box[1][1], box[0][0]:box[1][0]] += 1
+>> heatmap[heatmap <= threshold] = 0 In the video I set threshold = 4
+>* Constructing **Frame class** and recoded the heat_map from previous frame,then add these information  to current heat_map to remove one frame false positives, implemented in line **26 - 35** of **`video_pro.py`**
+>> class Frame(): def __init__(self):  self.heat_img = []    
+>> heat_img += frame_dec.heat_img
 
-Here's an example result showing the heatmap and bounding boxes overlaid on a frame of video:
+2.1 combining overlapping bounding boxes
 
-![alt text][image5]
+There sammple images are shown above, the basic step as follow:
+Step.1 Using Side windows and SVM classifier to get several overlapping possible windows, this is implmented in **`util_funcs.py`** from line **103 to 126** using function `slide_window` and `search_windows()`, detail implemented in  **`util_funcs.py`** from line **122 to 252**, the functions have been discussed in detail above;
+
+| possible windows  |    possible windows    |
+|---------- |:-------------:|
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/test3_window.jpg?raw=true)  |  ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/test4_window.jpg?raw=true) |
+
+Step.2 For each windows box , using heat_img[box[0][1]:box[1][1], box[0][0]:box[1][0]] += 1 to get heat_map, implemented in line **128** of **`video_pro.py`** using function **`heat_generation()`**
+
+| heat_map_1  |    heat_map_1   |
+|---------- |:-------------:|
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/test3_heat_1.jpg?raw=true)  |  ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/test4_heat_1.jpg?raw=true) |
+
+Step.3 Using threshold and heatmap[heatmap <= threshold] = 0 to remove false positives;
+
+| heat_map_2  |    heat_map_2   |
+|---------- |:-------------:|
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/test3_heat_2.jpg?raw=true)  |  ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/test4_heat_2.jpg?raw=true) |
+
+Step.4 Using  **`scipy.ndimage.measurements.label`** to get different blob and label image, the image whose pixels share same value (>0) belong to same object, implented in line ** 130** in **`video_pro.py`**;
+>> labels = label(heat_img)
+
+| Label  |    Label    |
+|---------- |:-------------:|
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/test3_labels.jpg?raw=true)  |  ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/test4_labels.jpg?raw=true) |
+|
+
+Step.5 Find the biggest rectangle box the cover all pixels belonging to same class,implemented in function `draw_labeled_bboxes` in **`util_funcs.py`** from line **311 to 326**.
+
+| possible windows  |    possible windows    |
+|---------- |:-------------:|
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/test3_final.jpg?raw=true)  |  ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/test4_final.jpg?raw=true) |
+
 
 ---
 
@@ -274,5 +340,15 @@ Here's an example result showing the heatmap and bounding boxes overlaid on a fr
 
 ####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+The project solve the detection problems with good performance but still problems;
+1. The speed can not be real-time, now it requrie 10 minutes to finish 1 minutes video;
+2. It can not handle overlapping problem, it may unable to detect individual cars if they are very close;
+3. The detection box need to be more stable, it may jump a little bits when environment changes,like light condition
+
+Furture:
+1. Combine the lane detection and car detection, the lane detection help to define a more robusr search area;
+2. Dynamic allocation searching window around the car, and save the location of the car in case of missing;
+3. Incorporate motion prediction which help to make more roburst search area and better prediction of boxes location.
+
+
 
