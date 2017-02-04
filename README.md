@@ -115,10 +115,10 @@ Step 3.Extract features for images of `vehicle` and `non-vehicle`.
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
 
- | Original Image  |      RGB      |  HSV   | LUV | HLS | YUV  |  YCrCb   |
- |---------- |:-------------:|------:|------:|------:|------:|------:|
- | ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) |  ![alt text][imagehog1] |  ![alt text][imagehog2] | ![alt text][imagehog3]| ![alt text][imagehog4] |  ![alt text][imagehog5] |  ![alt text][imagehog6] |
- | ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog7] |  ![alt text][imagehog8] | ![alt text][imagehog9]| ![alt text][imagehog10] |  ![alt text][imagehog11] |  ![alt text][imagehog12] |
+| Original Image  |      RGB      |  HSV   | LUV | HLS | YUV  |  YCrCb   |
+|---------- |:-------------:|------:|------:|------:|------:|------:|
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) |  ![alt text][imagehog1] |  ![alt text][imagehog2] | ![alt text][imagehog3]| ![alt text][imagehog4] |  ![alt text][imagehog5] |  ![alt text][imagehog6] |
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog7] |  ![alt text][imagehog8] | ![alt text][imagehog9]| ![alt text][imagehog10] |  ![alt text][imagehog11] |  ![alt text][imagehog12] |
  
  
  * Step 3.4: binned color features and color histogram features  extraction, from line **101 to 117**  in **`util_funcs.py`**.;
