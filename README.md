@@ -53,7 +53,7 @@ The goals / steps of this project are the following:
 
 [imagehog7]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2_hog_rgb.png?raw=true
 [imagehog8]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2_hog_hsv.png?raw=true
-[imagehog9]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/cnoncar_2_hog_LUV.png?raw=true
+[imagehog9]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2_hog_LUV.png?raw=true
 [imagehog10]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2_hog_hls.png?raw=true
 [imagehog11]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2_hog_YUV.png?raw=true
 [imagehog12]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2_hog_ycc.png?raw=true
@@ -108,32 +108,19 @@ Step 3.Extract features for images of `vehicle` and `non-vehicle`.
  
  
  * Step 3.3: Hog Feature extraction using **`skimage.hog()`**, from line **81 to 98**  in **`util_funcs.py`**;
- 	
-     | Original Image  |      RGB      | HSV | LUV|HLS|YUV|YCrCb|
+
+Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
+
+
+ | Original Image  |      RGB      |  HSV   | LUV | HLS | YUV  |  YCrCb   |
  |---------- |:-------------:|------:|------:|------:|------:|------:|
- | channel_1 |  ![alt text][imagehog1] |  ![alt text][imagehog2] | ![alt text][imagehog3]| ![alt text][imagehog4] |  ![alt text][imagehog5] |  ![alt text][imagehog6] |
- | channel_1 |  ![alt text][imagehog7] |  ![alt text][imagehog8] | ![alt text][imagehog9]| ![alt text][imagehog10] |  ![alt text][imagehog11] |  ![alt text][imagehog12] |
+ | ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) |  ![alt text][imagehog1] |  ![alt text][imagehog2] | ![alt text][imagehog3]| ![alt text][imagehog4] |  ![alt text][imagehog5] |  ![alt text][imagehog6] |
+ | ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog7] |  ![alt text][imagehog8] | ![alt text][imagehog9]| ![alt text][imagehog10] |  ![alt text][imagehog11] |  ![alt text][imagehog12] |
  
     
  * Step 3.4: binned color features and color histogram features  extraction, from line **101 to 117**  in **`util_funcs.py`**.;
  * Step 3.5: Combined all features together
 
-* Color Space Exploration:
-| Original Image  |      RGB      | HSV | LUV|HLS|YUV
-|----------|:-------------:|------:|
-| col 1 is |  left-aligned | $1600 |
-| col 2 is |    centered   |   $12 |
-| col 3 is | right-aligned |    $1 |
-I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
-
-
-
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
-
-Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
-
-
-![alt text][image2]
 
 ####2. Explain how you settled on your final choice of HOG parameters.
 
