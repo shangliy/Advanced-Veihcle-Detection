@@ -202,6 +202,12 @@ Considering the feature vectore length and accuracy, I choose **pix_per_cell = 8
 2.4 **`hog_channel`**
 Cause I choose **YCrCb** color space, thus I use **hog_channel=='ALL'** for more valuable information;
 
+2.5 Decision:
+>* **YCrCb** color space
+>* orient = 9
+>* pix_per_cell = 8, cell_per_block=2
+>* hog_channel=='ALL'
+
 ####3. Describe how you trained a classifier using your selected HOG features (and color features if you used them).
 
 The pipline of training classifier is shown below:
