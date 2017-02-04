@@ -1,5 +1,5 @@
-##Writeup Template
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+##Advanced Veihcle Detection
+###This is the README that includes all the rubric points and how you addressed each one.
 
 ---
 
@@ -27,17 +27,43 @@ The goals / steps of this project are the following:
 ###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
 
 ---
-###Writeup / README
+###README
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
+####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.
 
-You're reading it!
+This is the README that includes all the rubric points and how you addressed each one.
 
 ###Histogram of Oriented Gradients (HOG)
 
-####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+####1. Explain how extracted HOG features from the training images.
 
-The code for this step is contained in the first code cell of the IPython notebook (or in lines # through # of the file called `some_file.py`).  
+The pipeline of the feature extraction is shown in the figure.
+The detail Codes are in the train_model.py and util_funcs.py
+
+Step 1. Work start with Reading all the `vehicle` and `non-vehicle` images.
+* This work finised in line **21 to 44** in **train_model.py**. Got the image folders and collected all image paths;
+Step 2. Explore the Data Sep Properties;
+* This work used function **`data_explore()`** defined in line **17 to 48** in **util_funcs.py**.
+>The number of noncar images is  10040
+>The shape of  images is  (64, 64, 3)
+>The data type of image is float32
+
+Sample images:
+
+| vehicl   |      non-vehicle    |
+|----------|:-------------:|
+| ![alt text](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) |  ![alt text](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_1.jpg?raw=true) |
+| ![alt text](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_3.png?raw=true)|    ![alt text](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true)   | 
+| ![alt text](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_4.png?raw=true) | ![alt text](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_4.jpg?raw=true)|  
+
+Step 3.Extract features for images of `vehicle` and `non-vehicle`. 
+* Using Function **`extract_features()`** defined in line **53 to 77** in **`util_funcs.py`**.
+* Detail implemented in function **`single_img_features()`** defined in line **201 to 253** in **`util_funcs.py`**.,includes:
+ * Step 3.1: Reading image using mpimg.imread(), line **63** in **`util_funcs.py`**;
+ * Step 3.2: Colore Space Transform using cv2.cvtColor(), from line **209 to 221**  in **`util_funcs.py`**;
+ * Step 3.3: Hog Feature extraction using **`skimage.hog()`**, from line **81 to 98**  in **`util_funcs.py`**;
+ * Step 3.4: binned color features and color histogram features  extraction, from line **101 to 117**  in **`util_funcs.py`**.;
+ * Step 3.5: Combined all features together
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
