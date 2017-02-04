@@ -215,26 +215,36 @@ The pipline of training classifier is shown below:
 
 ###Sliding Window Search
 
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+####1. Describe how implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
 The key ideas of sliding window search are to capture the valuable information as more as possible while using as smaller as numbers of windows used;
+The implemention is to use function **`slide_window()`** from **line 122 to 156** in **`util_funcs.py`** and set parameters in **`video_pro.py`** from line **103 to 109**.
+The function **search within in the set srea with windows of different sizes**;
+
 First,  I observe the video to get the rough idea of size of car, the size should be from [64,64] to [350,150];
-	
-Secondly, to remove unnecessary information to increase the speed the accuracy,like the sky, left area of the car(cause the car running the left most), I limited the searching area;
+| samll car  |    big car    |
+|---------- |:-------------:|
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/small.png?raw=true)  |     ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/big.png?raw=true) |
+
+Secondly, to remove unnecessary information to increase the speed the accuracy,like the sky, left area of the car(cause the car running the left most), I limited the searching area, implemented in **`video_pro.py`** from line **106 to 109**
 
 > x_start = [640,640,640,750,854,960,960]
     x_stop = [None,None,None,None,None,None,None,None]
     y_start_stop = [[400, 600],[400, 600],[400, 650],[400, 650],[400, 650],[400, 650],[400, 650]]
-    
-Thirdly, to avoid the border missing, I need to choose windows size that could be divide by the search area.
+ ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/area.png?raw=true)
+  
+Thirdly, to avoid the border missing, I need to choose windows size that could be divide by the search area,implemented in **`video_pro.py`** from line **103 to 106**
 > For example, if x_start = 640, x_stop = 1280, the width = 640, then the width%window_size ==0 
-
+ ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/border_effect.png?raw=true)
 Besides, I choose different size for width and height, Thus, I Choose:
 >window_scale_w = [64,80,128,150,213,320,350]
 window_scale_h = [64,80,120,120,120,120,150]
 
 Finally, to speed up the search speed as well as to avoid big jump from window to window, I set differnt overlaps for different window size while keep the overlap as small as possible;
->overlap = [0.5,0.5,0.5,0.5,0.6,0.6,0.7]	
+>overlap = [0.5,0.5,0.5,0.5,0.6,0.6,0.7]
+
+So, the slide windows are shown in below:
+ ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/slide_windows.jpg?raw=true)
 
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to try to minimize false positives and reliably detect cars?
