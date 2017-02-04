@@ -217,6 +217,24 @@ The pipline of training classifier is shown below:
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
+The key ideas of sliding window search are to capture the valuable information as more as possible while using as smaller as numbers of windows used;
+First,  I observe the video to get the rough idea of size of car, the size should be from [64,64] to [350,150];
+	
+Secondly, to remove unnecessary information to increase the speed the accuracy,like the sky, left area of the car(cause the car running the left most), I limited the searching area;
+
+> x_start = [640,640,640,750,854,960,960]
+    x_stop = [None,None,None,None,None,None,None,None]
+    y_start_stop = [[400, 600],[400, 600],[400, 650],[400, 650],[400, 650],[400, 650],[400, 650]]
+    
+Thirdly, to avoid the border missing, I need to choose windows size that could be divide by the search area.
+> For example, if x_start = 640, x_stop = 1280, the width = 640, then the width%window_size ==0 
+
+Besides, I choose different size for width and height, Thus, I Choose:
+>window_scale_w = [64,80,128,150,213,320,350]
+window_scale_h = [64,80,120,120,120,120,150]
+
+Finally, to speed up the search speed as well as to avoid big jump from window to window, I set differnt overlaps for different window size while keep the overlap as small as possible;
+>overlap = [0.5,0.5,0.5,0.5,0.6,0.6,0.7]	
 
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to try to minimize false positives and reliably detect cars?
