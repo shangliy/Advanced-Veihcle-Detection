@@ -44,6 +44,7 @@ Step 1. Work start with Reading all the `vehicle` and `non-vehicle` images.
 * This work finised in line **21 to 44** in **train_model.py**. Got the image folders and collected all image paths;
 Step 2. Explore the Data Sep Properties;
 * This work used function **`data_explore()`** defined in line **17 to 48** in **util_funcs.py**.
+
 >The number of noncar images is  10040
 >The shape of  images is  (64, 64, 3)
 >The data type of image is float32
@@ -60,11 +61,43 @@ Step 3.Extract features for images of `vehicle` and `non-vehicle`.
 * Using Function **`extract_features()`** defined in line **53 to 77** in **`util_funcs.py`**.
 * Detail implemented in function **`single_img_features()`** defined in line **201 to 253** in **`util_funcs.py`**.,includes:
  * Step 3.1: Reading image using mpimg.imread(), line **63** in **`util_funcs.py`**;
- * Step 3.2: Colore Space Transform using cv2.cvtColor(), from line **209 to 221**  in **`util_funcs.py`**;
+ * Step 3.2: Colore Space Transform using cv2.cvtColor(), Transform image from RGB to desired Color Space from line **209 to 221**  in **`util_funcs.py`**;
+
+[image1]: ./examples/car_not_car.png
+[image2]: ./examples/car_not_car.png
+[image3]: ./examples/car_not_car.png
+[image4]: ./examples/car_not_car.png
+[image5]: ./examples/car_not_car.png
+[image6]: ./examples/car_not_car.png
+[image7]: ./examples/car_not_car.png
+[image8]: ./examples/car_not_car.png
+[image9]: ./examples/car_not_car.png
+[image10]: ./examples/car_not_car.png
+[image11]: ./examples/car_not_car.png
+[image12]: ./examples/car_not_car.png
+[image13]: ./examples/car_not_car.png
+[image14]: ./examples/car_not_car.png
+[image11]: ./examples/car_not_car.png
+[image12]: ./examples/car_not_car.png
+[image13]: ./examples/car_not_car.png
+[image14]: ./examples/car_not_car.png
+
+ 	| Channels  |      RGB      | HSV | LUV|HLS|YUV|YCrCb|
+    |----------|:-------------:|------:||------:||------:||------:||------:|
+    | channel_1 |  left-aligned | $1600 |$1600 |$1600 |$1600 |$1600 |
+    | channel_2 |    centered   |   $12 |$1600 |$1600 |$1600 |$1600 |
+    | channel_3 | right-aligned |    $1 |$1600 |$1600 |$1600 |$1600 |
+ 
  * Step 3.3: Hog Feature extraction using **`skimage.hog()`**, from line **81 to 98**  in **`util_funcs.py`**;
  * Step 3.4: binned color features and color histogram features  extraction, from line **101 to 117**  in **`util_funcs.py`**.;
  * Step 3.5: Combined all features together
 
+* Color Space Exploration:
+| Original Image  |      RGB      | HSV | LUV|HLS|YUV
+|----------|:-------------:|------:|
+| col 1 is |  left-aligned | $1600 |
+| col 2 is |    centered   |   $12 |
+| col 3 is | right-aligned |    $1 |
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
 ![alt text][image1]
