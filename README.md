@@ -115,11 +115,19 @@ Step 3.Extract features for images of `vehicle` and `non-vehicle`.
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
 
-| Original Image  |      RGB      |  HSV   | LUV | HLS | YUV  |  YCrCb   |
-|---------- |:-------------:|------:|------:|------:|------:|------:|
-| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) |  ![alt text][imagehog1] |  ![alt text][imagehog2] | ![alt text][imagehog3]| ![alt text][imagehog4] |  ![alt text][imagehog5] |  ![alt text][imagehog6] |
-| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog7] |  ![alt text][imagehog8] | ![alt text][imagehog9]| ![alt text][imagehog10] |  ![alt text][imagehog11] |  ![alt text][imagehog12] |
- 
+
+| Color_Space  |          |
+|---------- |:-------------:|
+| Original Image  |     ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true)      |
+| RGB  |      ![alt text][imagehog1]      |
+| HSV  |      ![alt text][imagehog2]      |
+| LUV  |      ![alt text][imagehog3]      |
+| HLS  |      ![alt text][imagehog4]      |
+| YUV  |      ![alt text][imagehog5]      |
+| YCrCb  |     ![alt text][imagehog6]      |
+
+
+
  
  * Step 3.4: binned color features and color histogram features  extraction, from line **101 to 117**  in **`util_funcs.py`**.;
  
@@ -128,7 +136,39 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 ####2. Explain how you settled on your final choice of HOG parameters.
 
-The 
+The HOG parameters include **`color_space`** ,**`orient`**, **`pix_per_cell`**, **`cell_per_block`**, and **`hog_channel`**
+
+2.1 **`color_space`**
+ Explore the color space from 3-d plot and compare the `vehicle` and `non-vehicle` images
+ 
+ 
+ Also, we can compare the hog features between  the `vehicle` and `non-vehicle` images
+ 
+| Original Image  |      RGB      |  
+|---------- |:-------------:|------:|
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) |  ![alt text][imagehog1] | 
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog7] | 
+| Original Image  |      HSV      | 
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) | ![alt text][imagehog2] | 
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog8] |
+| Original Image  |      LUV      | 
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) | ![alt text][imagehog3] | 
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog9] |
+| Original Image  |      HLS      | 
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) | ![alt text][imagehog4] | 
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog10] |
+| Original Image  |      YUV      | 
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) | ![alt text][imagehog5] | 
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog11] |
+| Original Image  |      YCrCb      | 
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) | ![alt text][imagehog6] | 
+| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog12] |
+
+2.2 **`orient`**
+
+2.3 **`pix_per_cell`** and **`cell_per_block`**
+
+2.4 **`hog_channel`**
 
 ####3. Describe how you trained a classifier using your selected HOG features (and color features if you used them).
 
