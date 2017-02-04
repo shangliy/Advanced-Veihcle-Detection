@@ -228,6 +228,7 @@ The implemention is to use function **`slide_window()`** from **line 122 to 156*
 The function **search within in the set srea with windows of different sizes**;
 
 First,  I observe the video to get the rough idea of size of car, the size should be from [64,64] to [350,150];
+
 | samll car  |    big car    |
 |---------- |:-------------:|
 | ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/small.png?raw=true)  |     ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/big.png?raw=true) |
