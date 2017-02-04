@@ -43,6 +43,23 @@ The goals / steps of this project are the following:
 [imagecol17]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_YCrCb_1.png?raw=true
 [imagecol18]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_YCrCb_2.png?raw=true
 
+
+[imagehog1]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_hog_rgb.png?raw=true
+[imagehog2]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_hog_hsv.png?raw=true
+[imagehog3]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_hog_LUV.png?raw=true
+[imagehog4]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_hog_hls.png?raw=true
+[imagehog5]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_hog_yuv.png?raw=true
+[imagehog6]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_hog_ycc.png?raw=true
+
+[imagehog7]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2_hog_rgb.png?raw=true
+[imagehog8]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2_hog_hsv.png?raw=true
+[imagehog9]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/cnoncar_2_hog_LUV.png?raw=true
+[imagehog10]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2_hog_hls.png?raw=true
+[imagehog11]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2_hog_YUV.png?raw=true
+[imagehog12]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2_hog_ycc.png?raw=true
+
+
+
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
 ###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
 
@@ -94,8 +111,8 @@ Step 3.Extract features for images of `vehicle` and `non-vehicle`.
  	
      | Original Image  |      RGB      | HSV | LUV|HLS|YUV|YCrCb|
  |---------- |:-------------:|------:|------:|------:|------:|------:|
- | channel_1 |  ![alt text][imagecol1] |  ![alt text][imagecol4] | ![alt text][imagecol7]| ![alt text][imagecol10] |  ![alt text][imagecol13] |  ![alt text][imagecol16] |
- | channel_1 |  ![alt text][imagecol1] |  ![alt text][imagecol4] | ![alt text][imagecol7]| ![alt text][imagecol10] |  ![alt text][imagecol13] |  ![alt text][imagecol16] |
+ | channel_1 |  ![alt text][imagehog1] |  ![alt text][imagehog2] | ![alt text][imagehog3]| ![alt text][imagehog4] |  ![alt text][imagehog5] |  ![alt text][imagehog6] |
+ | channel_1 |  ![alt text][imagehog7] |  ![alt text][imagehog8] | ![alt text][imagehog9]| ![alt text][imagehog10] |  ![alt text][imagehog11] |  ![alt text][imagehog12] |
  
     
  * Step 3.4: binned color features and color histogram features  extraction, from line **101 to 117**  in **`util_funcs.py`**.;
