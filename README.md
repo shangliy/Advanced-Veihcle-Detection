@@ -81,7 +81,7 @@ The detail Codes are in the train_model.py and util_funcs.py
 ![hog](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/Svm_Training_hog.png?raw=true)
 
 Step 1. Work start with Reading all the `vehicle` and `non-vehicle` images.
-* This work finised in line **21 to 44** in **train_model.py**. Got the image folders and collected all image paths;
+* This work finised in line **21 to 44** in **`train_model.py`**. Got the image folders and collected all image paths;
 Step 2. Explore the Data Sep Properties;
 * This work used function **`data_explore()`** defined in line **17 to 48** in **util_funcs.py**.
 
@@ -139,48 +139,85 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 The HOG parameters include **`color_space`** ,**`orient`**, **`pix_per_cell`**, **`cell_per_block`**, and **`hog_channel`**
 
 2.1 **`color_space`**
- Explore the color space from 3-d plot and compare the `vehicle` and `non-vehicle` images
- 
  
  Also, we can compare the hog features between  the `vehicle` and `non-vehicle` images
  
-| Original Image  |      RGB      |  
+| Original Image  |      **RGB**      |  
 |---------- |:-------------:|------:|
-| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) |  ![alt text][imagehog1] | 
-| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog7] | 
-| Original Image  |      HSV      | 
-| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) | ![alt text][imagehog2] | 
-| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog8] |
-| Original Image  |      LUV      | 
-| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) | ![alt text][imagehog3] | 
-| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog9] |
-| Original Image  |      HLS      | 
-| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) | ![alt text][imagehog4] | 
-| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog10] |
-| Original Image  |      YUV      | 
-| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) | ![alt text][imagehog5] | 
-| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog11] |
-| Original Image  |      YCrCb      | 
-| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) | ![alt text][imagehog6] | 
-| ![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog12] |
+| `vehicle`![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) |  ![alt text][imagehog1] | 
+| `non-vehicle`![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog7] | 
+| Original Image  |      **HSV**      | 
+| `vehicle`![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) | ![alt text][imagehog2] | 
+| `non-vehicle`![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog8] |
+| Original Image  |      **HLS**      | 
+| `vehicle`![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) | ![alt text][imagehog4] | 
+| `non-vehicle`![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog10] |
+| Original Image  |      **YUV**      | 
+| `vehicle`![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) | ![alt text][imagehog5] | 
+| `non-vehicle`![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog11] |
+| Original Image  |      **YCrCb**      | 
+| `vehicle`![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1.jpg?raw=true) | ![alt text][imagehog6] | 
+| `non-vehicle`![](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/noncar_2.jpg?raw=true) |  ![alt text][imagehog12] |
+
+From the comparision above, we can see for
+>* RGB: The Hog features of three channels are almost same, and and thus not show enough information compared to other color space using three channels;
+>* HSV/HLS: Both features are good,but we they do kind of worse than the YCbCr, detail explained below;
+>* YUV/YCrCb: 
+>>*	From the hog images, we can see the hog features of YUV/YCrCb can detect the shape of the car;
+>>*	The difference between vehicle and non-vehicle are large enough to make decision
+>>*    Compared to HSV/HLS, the features strength are stronger and more robust, and the difference are more distinguishable;
+>>*    These two are basically same, we choose YCrCb for general;
+
+Thus, I choose to use **YCrCb** color space;
 
 2.2 **`orient`**
+According the guidence, the orient in general from 8 to 13; thus I tune the parameter based on test performance;
+
+| orient  |    accuracy %     |
+|---------- |:-------------:|
+| 8  |     97.6 |
+| 9 |      98.5      |
+| 10  |      98.2      |
+| 11  |    98.7      |
+| 12  |      98.6      |
+| 13  |      98.5    |
+
+We can see the the result is good enough when orient equal to 9, considering the calculation speed, I choose orient = 9
 
 2.3 **`pix_per_cell`** and **`cell_per_block`**
 
+The image size = 64
+
+| pix_per_cell  |     cell_per_block     |  Hog Feature length    | accuracy %     |
+|---------- |:-------------:|:-------------:|:-------------:|
+| 4 |      2      | 24300 | 98.7 |
+| 8 |      2      | 5292 | 98.5 |
+| 8  |    4      | 10800 | 97.6 |
+| 16  |      2      | 972 | 97.5 |
+| 16  |      4    | 432 | 96.3 |
+
+
+Considering the feature vectore length and accuracy, I choose **pix_per_cell = 8, cell_per_block=2**
+
 2.4 **`hog_channel`**
+Cause I choose **YCrCb** color space, thus I use **hog_channel=='ALL'** for more valuable information;
 
 ####3. Describe how you trained a classifier using your selected HOG features (and color features if you used them).
 
+The pipline of training classifier is shown below:
 ![svm](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/Svm_Training_svm.png?raw=true)
+>* Step 1.Normaliztion features using `StandardScaler()` considering the different value range of features, line **82 to 87**  in **`train_model.py`**;
+* Step 2.Split the all training data into train data and test data to weak the overfitting using `sklearn.model_selection.train_test_split` with `split_ratio = 0.1`,line **94**  in **`train_model.py`**;	
+* Step 3.Train the SVM classifier `svc = LinearSVC()` using `svc.fit(X_train, y_train)` with training data,line **100 to 105**  in **`train_model.py`**;
+* Step 4.Test the classifier performace using `svc.score(X_test, y_test)` with test data,line **108**  in **`train_model.py`**;
+* Step 5.Save the trained model to pickle file for later usage,line **113 to 125**  in **`train_model.py`**.
+
 
 ###Sliding Window Search
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
 
-![alt text][image3]
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to try to minimize false positives and reliably detect cars?
 
