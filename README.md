@@ -69,6 +69,7 @@ The goals / steps of this project are the following:
 ####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.
 
 This is the README that includes all the rubric points and how you addressed each one.
+![whole](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/Svm_Training_whole.png?raw=true)
 
 ###Histogram of Oriented Gradients (HOG)
 
@@ -76,6 +77,8 @@ This is the README that includes all the rubric points and how you addressed eac
 
 The pipeline of the feature extraction is shown in the figure.
 The detail Codes are in the train_model.py and util_funcs.py
+
+![hog](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/Svm_Training_hog.png?raw=true)
 
 Step 1. Work start with Reading all the `vehicle` and `non-vehicle` images.
 * This work finised in line **21 to 44** in **train_model.py**. Got the image folders and collected all image paths;
@@ -119,16 +122,17 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
  
     
  * Step 3.4: binned color features and color histogram features  extraction, from line **101 to 117**  in **`util_funcs.py`**.;
+ 
  * Step 3.5: Combined all features together
 
 
 ####2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+The 
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+####3. Describe how you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using...
+![svm](https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/Svm_Training_svm.png?raw=true)
 
 ###Sliding Window Search
 
