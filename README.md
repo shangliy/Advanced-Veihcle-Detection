@@ -23,6 +23,26 @@ The goals / steps of this project are the following:
 [image6]: ./examples/example_output.jpg
 [video1]: ./project_video.mp4
 
+
+[imagecol1]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_RGB_0.png?raw=true
+[imagecol2]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_RGB_1.png?raw=true
+[imagecol3]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_RGB_2.png?raw=true
+[imagecol4]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_HSV_0.png?raw=true
+[imagecol5]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_HSV_1.png?raw=true
+[imagecol6]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_HSV_2.png?raw=true
+[imagecol7]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_LUV_0.png?raw=true
+[imagecol8]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_LUV_1.png?raw=true
+[imagecol9]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_LUV_2.png?raw=true
+[imagecol10]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_HLS_0.png?raw=true
+[imagecol11]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_HLS_1.png?raw=true
+[imagecol12]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_HLS_2.png?raw=true
+[imagecol13]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_YUV_0.png?raw=true
+[imagecol14]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_YUV_1.png?raw=true
+[imagecol15]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_YUV_2.png?raw=true
+[imagecol16]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_YCrCb_0.png?raw=true
+[imagecol17]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_YCrCb_1.png?raw=true
+[imagecol18]: https://github.com/shangliy/Advanced-Veihcle-Detection/blob/master/reference_imgs/car_1_YCrCb_2.png?raw=true
+
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
 ###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
 
@@ -63,30 +83,12 @@ Step 3.Extract features for images of `vehicle` and `non-vehicle`.
  * Step 3.1: Reading image using mpimg.imread(), line **63** in **`util_funcs.py`**;
  * Step 3.2: Colore Space Transform using cv2.cvtColor(), Transform image from RGB to desired Color Space from line **209 to 221**  in **`util_funcs.py`**;
 
-[image1]: ./examples/car_not_car.png
-[image2]: ./examples/car_not_car.png
-[image3]: ./examples/car_not_car.png
-[image4]: ./examples/car_not_car.png
-[image5]: ./examples/car_not_car.png
-[image6]: ./examples/car_not_car.png
-[image7]: ./examples/car_not_car.png
-[image8]: ./examples/car_not_car.png
-[image9]: ./examples/car_not_car.png
-[image10]: ./examples/car_not_car.png
-[image11]: ./examples/car_not_car.png
-[image12]: ./examples/car_not_car.png
-[image13]: ./examples/car_not_car.png
-[image14]: ./examples/car_not_car.png
-[image11]: ./examples/car_not_car.png
-[image12]: ./examples/car_not_car.png
-[image13]: ./examples/car_not_car.png
-[image14]: ./examples/car_not_car.png
 
- 	| Channels  |      RGB      | HSV | LUV|HLS|YUV|YCrCb|
-    |----------|:-------------:|------:||------:||------:||------:||------:|
-    | channel_1 |  left-aligned | $1600 |$1600 |$1600 |$1600 |$1600 |
-    | channel_2 |    centered   |   $12 |$1600 |$1600 |$1600 |$1600 |
-    | channel_3 | right-aligned |    $1 |$1600 |$1600 |$1600 |$1600 |
+ | Channels  |      RGB      | HSV | LUV|HLS|YUV|YCrCb|
+ |---------- |:-------------:|------:||------:||------:||------:||------:|
+ | channel_1 |  ![alt text][imagecol1] |  ![alt text][imagecol4] | ![alt text][imagecol7]| ![alt text][imagecol10] |  ![alt text][imagecol13] |  ![alt text][imagecol16] |
+ | channel_2 |  ![alt text][imagecol2] |  ![alt text][imagecol5] | ![alt text][imagecol8]| ![alt text][imagecol11] | ![alt text][imagecol14] | ![alt text][imagecol17] |
+ | channel_3 |  ![alt text][imagecol3] |  ![alt text][imagecol6] | ![alt text][imagecol9]| ![alt text][imagecol12] | ![alt text][imagecol15] | ![alt text][imagecol18] |
  
  * Step 3.3: Hog Feature extraction using **`skimage.hog()`**, from line **81 to 98**  in **`util_funcs.py`**;
  * Step 3.4: binned color features and color histogram features  extraction, from line **101 to 117**  in **`util_funcs.py`**.;
@@ -100,7 +102,7 @@ Step 3.Extract features for images of `vehicle` and `non-vehicle`.
 | col 3 is | right-aligned |    $1 |
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
-![alt text][image1]
+
 
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
