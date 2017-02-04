@@ -83,7 +83,6 @@ Step 3.Extract features for images of `vehicle` and `non-vehicle`.
  * Step 3.1: Reading image using mpimg.imread(), line **63** in **`util_funcs.py`**;
  * Step 3.2: Colore Space Transform using cv2.cvtColor(), Transform image from RGB to desired Color Space from line **209 to 221**  in **`util_funcs.py`**;
 
-
  | Channels  |      RGB      | HSV | LUV|HLS|YUV|YCrCb|
  |---------- |:-------------:|------:|------:|------:|------:|------:|
  | channel_1 |  ![alt text][imagecol1] |  ![alt text][imagecol4] | ![alt text][imagecol7]| ![alt text][imagecol10] |  ![alt text][imagecol13] |  ![alt text][imagecol16] |
@@ -92,6 +91,13 @@ Step 3.Extract features for images of `vehicle` and `non-vehicle`.
  
  
  * Step 3.3: Hog Feature extraction using **`skimage.hog()`**, from line **81 to 98**  in **`util_funcs.py`**;
+ 	
+     | Original Image  |      RGB      | HSV | LUV|HLS|YUV|YCrCb|
+ |---------- |:-------------:|------:|------:|------:|------:|------:|
+ | channel_1 |  ![alt text][imagecol1] |  ![alt text][imagecol4] | ![alt text][imagecol7]| ![alt text][imagecol10] |  ![alt text][imagecol13] |  ![alt text][imagecol16] |
+ | channel_1 |  ![alt text][imagecol1] |  ![alt text][imagecol4] | ![alt text][imagecol7]| ![alt text][imagecol10] |  ![alt text][imagecol13] |  ![alt text][imagecol16] |
+ 
+    
  * Step 3.4: binned color features and color histogram features  extraction, from line **101 to 117**  in **`util_funcs.py`**.;
  * Step 3.5: Combined all features together
 
