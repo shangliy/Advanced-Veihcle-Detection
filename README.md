@@ -85,10 +85,11 @@ Step 3.Extract features for images of `vehicle` and `non-vehicle`.
 
 
  | Channels  |      RGB      | HSV | LUV|HLS|YUV|YCrCb|
- |---------- |:-------------:|------:||------:||------:||------:||------:|
+ |---------- |:-------------:|------:|------:|------:|------:|------:|
  | channel_1 |  ![alt text][imagecol1] |  ![alt text][imagecol4] | ![alt text][imagecol7]| ![alt text][imagecol10] |  ![alt text][imagecol13] |  ![alt text][imagecol16] |
  | channel_2 |  ![alt text][imagecol2] |  ![alt text][imagecol5] | ![alt text][imagecol8]| ![alt text][imagecol11] | ![alt text][imagecol14] | ![alt text][imagecol17] |
  | channel_3 |  ![alt text][imagecol3] |  ![alt text][imagecol6] | ![alt text][imagecol9]| ![alt text][imagecol12] | ![alt text][imagecol15] | ![alt text][imagecol18] |
+ 
  
  * Step 3.3: Hog Feature extraction using **`skimage.hog()`**, from line **81 to 98**  in **`util_funcs.py`**;
  * Step 3.4: binned color features and color histogram features  extraction, from line **101 to 117**  in **`util_funcs.py`**.;
